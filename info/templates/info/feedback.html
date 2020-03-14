@@ -1,0 +1,58 @@
+{% extends 'info/base.html' %}
+    {% load static %}
+
+    {% block content %}
+    
+  {% if error %}
+    <div class="alert alert-danger">
+      {{ error.text }}
+    </div>
+  {% endif %}
+
+<h1>FeedBack</h1>
+{% if feedb %}
+<form method="POST" action="{% url 'feedback' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-group">
+    Teacher:
+    <select name='tname' class="form-control">
+      {% for t in teacher %}
+      <option>
+      {{t.name}}
+    </option>
+    {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    Course:
+    <select name='cname' class="form-control">
+      {% for c in courses %}
+      <option>
+      {{c.name}}
+    </option>
+    {% endfor %}
+    </select>
+  </div>
+  <div class="rating">
+    Rating:
+    <br>
+    <span class="fa fa-star">
+    <input id="rating-5" name="star" type="radio" value="1" class="radio-btn hide" />
+    <input id="star4" name="star" type="radio" value="2" class="radio-btn hide" />
+    <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
+    <input id="star2" name="star" type="radio" value="4" class="radio-btn hide" />
+    <input id="star1" name="star" type="radio" value="5" class="radio-btn hide" />
+    <div class="clear"></div>
+    </span>
+    </div>
+
+  <div class="form-group">
+    Any Suggestions:
+    <br>
+    <textarea class="form-control"  name="content" rows="3" placeholder="Please mention your suggestions here"></textarea>
+  </div>
+  <div class="form-group">
+  <input type="submit" name="submit" value="Submit FeedBack">
+</form>
+{% endif %}
+    {% endblock %}s

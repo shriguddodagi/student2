@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>MARKS</h2>
+
+<table>
+  <tr>
+    <th>Student USN</th>
+    <th>Student Name</th>
+    <th>Attendance</th>
+    <th>CIE</th>
+  </tr>
+
+  {% for sc in sc_list %}
+    <tr>
+        <td>{{ sc.student_id }}</td>
+        <td>{{ sc.student.name }}</td>
+        {% if sc.get_attendance < 75 %}
+            <td>{{ sc.get_attendance }} % </td>
+        {% else %}
+            <td>{{ sc.get_attendance }} %</td>
+        {% endif %}
+        {% if sc.get_cie < 25 %}
+            <td>{{ sc.get_cie }}</td>
+        {% else %}
+            <td>{{ sc.get_cie }}</td>
+        {% endif %}
+    </tr>
+    {% empty %}
+            <p>student has no courses</p>
+    {% endfor %}
+    </table>
+
+</body>
+</html>
